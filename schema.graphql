@@ -1,0 +1,19 @@
+type ExampleEntity @entity {
+  id: ID!
+  count: BigInt!
+  owner: Bytes! # address
+  spender: Bytes! # address
+}
+
+type MintToEntity @entity {
+  id: ID!
+  count: BigInt!
+  user: User
+}
+
+type User @entity {
+  id: ID!
+  account: Bytes!
+  reward: BigInt!
+  mintEvent: MintToEntity @derivedFrom(field: "user") 
+}

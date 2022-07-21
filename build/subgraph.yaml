@@ -1,0 +1,38 @@
+specVersion: 0.0.4
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Contract
+    network: mumbai
+    source:
+      address: "0x3c8DA8100A53245F4499DbF039AF553E889D6E18"
+      abi: Contract
+      startBlock: 27049590
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - ExampleEntity
+        - User
+        - Approval
+        - MintFirstTime
+        - MintTo
+        - OwnershipTransferred
+        - Transfer
+      abis:
+        - name: Contract
+          file: Contract/abis/Contract.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: MintFirstTime(address,uint256,string,string)
+          handler: handleMintFirstTime
+        - event: MintTo(address,uint256,uint256)
+          handler: handleMintTo
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: Contract/Contract.wasm
